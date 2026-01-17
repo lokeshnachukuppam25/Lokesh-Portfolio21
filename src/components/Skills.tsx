@@ -52,7 +52,7 @@ const Skills: FC = () => {
             className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed"
           >
             Explore my technical arsenal - from frontend magic to AI wizardry, 
-            here's everything I bring to the table
+            here&apos;s everything I bring to the table
           </p>
         </div>
 

@@ -14,7 +14,7 @@ const Contact: FC = () => {
             Contact Me
           </h1>
           <p className="text-gray-300 text-xl font-light mb-4 max-w-2xl mx-auto">
-            Let's connect! Drop me a message below 💬
+            Let&apos;s connect! Drop me a message below 💬
           </p>
           <div className="flex items-center justify-center gap-2 mb-4">
             <div className="h-px w-12 bg-gradient-to-r from-transparent to-gray-600"></div>
