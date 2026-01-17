@@ -1,7 +1,7 @@
 "use client";
 
 import { FC } from "react";
-import { FaCode, FaGlobe, FaChartBar, FaMicrochip, FaCircuit, FaBolt } from "react-icons/fa";
+import { FaCode, FaGlobe, FaChartBar, FaMicrochip, FaCogs, FaBolt } from "react-icons/fa";
 
 interface Service {
   id: string;
@@ -39,7 +39,7 @@ const SERVICES: Service[] = [
     id: "service-5",
     title: "PCB Design & Hardware Prototyping",
     description: "Design and implement schematic diagrams and multi-layer PCB layouts in Altium Designer and Proteus, ensuring optimal component placement and signal reliability.",
-    icon: <FaCircuit size={24} />
+    icon: <FaCogs size={24} />
   },
   {
     id: "service-6",
