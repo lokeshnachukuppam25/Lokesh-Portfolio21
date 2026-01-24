@@ -1,10 +1,41 @@
 "use client";
 
-import { FC } from "react";
+import { FC, useState } from "react";
 import Image from "next/image";
 import { SOCIAL_LINKS } from "../data/social-links";
 
 const Contact: FC = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    const formData = new FormData(e.currentTarget);
+    
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitStatus('success');
+        (e.target as HTMLFormElement).reset();
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section className="py-20 px-[5vw] bg-black">
       <div className="max-w-2xl mx-auto">
@@ -34,7 +65,21 @@ const Contact: FC = () => {
 
         {/* Contact Form */}
         <div className="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm border border-gray-700/50 rounded-3xl p-6 mb-12 hover:border-purple-500/50 transition-all duration-500 shadow-2xl hover:shadow-purple-900/20">
-          <form action="mailto:lokesh.nachukuppam@gmail.com" method="post" encType="text/plain" className="space-y-5">
+          {submitStatus === 'success' && (
+            <div className="mb-5 p-4 bg-green-500/20 border border-green-500/50 rounded-xl text-green-400 text-center">
+              ✅ Message sent successfully! I&apos;ll get back to you soon.
+            </div>
+          )}
+          {submitStatus === 'error' && (
+            <div className="mb-5 p-4 bg-red-500/20 border border-red-500/50 rounded-xl text-red-400 text-center">
+              ❌ Something went wrong. Please try again or email me directly.
+            </div>
+          )}
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {/* Web3Forms Access Key */}
+            <input type="hidden" name="access_key" value="dc1bc12c-17da-40d7-882d-0c58db20e4f9" />
+            <input type="hidden" name="subject" value="New Contact Form Submission from Portfolio" />
+            <input type="hidden" name="from_name" value="Portfolio Contact Form" />
             {/* Your Name */}
             <div className="group">
               <label htmlFor="name" className="block text-white font-semibold mb-2 text-sm uppercase tracking-wide">
@@ -76,7 +121,7 @@ const Contact: FC = () => {
                 required
                 rows={5}
                 className="w-full px-4 py-3 bg-black/50 border border-gray-700 rounded-xl text-white placeholder:text-gray-500 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-300 resize-none"
-                placeholder="Tell me about your project or just say hi!"
+                placeholder=""
               ></textarea>
             </div>
 
@@ -84,12 +129,15 @@ const Contact: FC = () => {
             <div>
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-700 hover:via-purple-700 hover:to-pink-700 text-white font-bold px-6 py-3 rounded-xl transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-purple-900/50 hover:scale-[1.02] group"
+                disabled={isSubmitting}
+                className="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-700 hover:via-purple-700 hover:to-pink-700 text-white font-bold px-6 py-3 rounded-xl transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-purple-900/50 hover:scale-[1.02] group disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
-                <span>Send Message</span>
-                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
+                <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
+                {!isSubmitting && (
+                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                )}
               </button>
             </div>
           </form>

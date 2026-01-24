@@ -42,17 +42,17 @@ const Who: React.FC = () => {
                         
                         {/* Social Icons */}
                         <div className="icons absolute top-[220px] left-5 h-[130px] w-[50px] flex flex-col items-center justify-around fill-white text-white">
-                          <a href="https://github.com/lokesh-username" target="_blank" rel="noopener noreferrer">
+                          <a href="https://github.com/lokeshnachukuppam25" target="_blank" rel="noopener noreferrer">
                             <i className="fab fa-github text-white text-lg cursor-pointer hover:scale-125 transition-transform"></i>
                           </a>
-                          <a href="https://linkedin.com/in/lokesh-profile" target="_blank" rel="noopener noreferrer">
+                          <a href="https://www.linkedin.com/in/lokesh-nachukuppam-403057218" target="_blank" rel="noopener noreferrer">
                             <i className="fab fa-linkedin-in text-white text-lg cursor-pointer hover:scale-125 transition-transform"></i>
                           </a>
-                          <a href="mailto:lokesh@example.com">
+                          <a href="mailto:lokesh.nachukuppam@gmail.com">
                             <i className="fas fa-envelope text-white text-lg cursor-pointer hover:scale-125 transition-transform"></i>
                           </a>
-                          <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer">
-                            <i className="fab fa-whatsapp text-white text-lg cursor-pointer hover:scale-125 transition-transform"></i>
+                          <a href="https://leetcode.com/u/NachukuppamLokesh/" target="_blank" rel="noopener noreferrer">
+                            <i className="fab fa-code text-white text-lg cursor-pointer hover:scale-125 transition-transform"></i>
                           </a>
                         </div>
                       </div>

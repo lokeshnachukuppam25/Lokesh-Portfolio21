@@ -60,7 +60,7 @@ const ProfileCard: FC = () => {
               {/* Social Links */}
               <div className="flex justify-center gap-4 mb-6">
                 <a
-                  href="https://github.com/lokeshnachukuppam"
+                  href="https://github.com/lokeshnachukuppam25"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 flex items-center justify-center bg-gray-800 hover:bg-blue-600 rounded-full transition-all duration-300 hover:scale-110"
@@ -68,7 +68,7 @@ const ProfileCard: FC = () => {
                   <FaGithub className="text-white text-xl" />
                 </a>
                 <a
-                  href="https://linkedin.com/in/lokeshnachukuppam"
+                  href="https://www.linkedin.com/in/lokesh-nachukuppam-403057218"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 flex items-center justify-center bg-gray-800 hover:bg-blue-600 rounded-full transition-all duration-300 hover:scale-110"
@@ -76,7 +76,7 @@ const ProfileCard: FC = () => {
                   <FaLinkedin className="text-white text-xl" />
                 </a>
                 <a
-                  href="https://leetcode.com/lokeshnachukuppam"
+                  href="https://leetcode.com/u/NachukuppamLokesh/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 flex items-center justify-center bg-gray-800 hover:bg-blue-600 rounded-full transition-all duration-300 hover:scale-110"

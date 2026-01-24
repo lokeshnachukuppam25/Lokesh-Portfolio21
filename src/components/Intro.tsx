@@ -114,7 +114,7 @@ const Intro: FC = () => {
           <i className="fas fa-envelope text-3xl"></i>
         </a>
         <a
-          href="https://wa.me/1234567890"
+          href="https://wa.me/916281008697"
           target="_blank"
           rel="noopener noreferrer"
           className="text-white hover:text-[#25D366] transition-colors duration-300 hover:scale-125 transform"
@@ -122,7 +122,7 @@ const Intro: FC = () => {
           <i className="fab fa-whatsapp text-3xl"></i>
         </a>
         <a
-          href="https://linkedin.com/in/lokesh-profile"
+          href="https://www.linkedin.com/in/lokesh-nachukuppam-403057218"
           target="_blank"
           rel="noopener noreferrer"
           className="text-white hover:text-[#0077B5] transition-colors duration-300 hover:scale-125 transform"
@@ -130,7 +130,7 @@ const Intro: FC = () => {
           <i className="fab fa-linkedin-in text-3xl"></i>
         </a>
         <a
-          href="https://leetcode.com/lokesh-username"
+          href="https://leetcode.com/u/NachukuppamLokesh/"
           target="_blank"
           rel="noopener noreferrer"
           className="text-white hover:text-[#FFA116] transition-colors duration-300 hover:scale-125 transform"
@@ -138,7 +138,7 @@ const Intro: FC = () => {
           <i className="fas fa-code text-3xl"></i>
         </a>
         <a
-          href="https://github.com/lokesh-username"
+          href="https://github.com/lokeshnachukuppam25"
           target="_blank"
           rel="noopener noreferrer"
           className="text-white hover:text-[#40ffaa] transition-colors duration-300 hover:scale-125 transform"

@@ -22,6 +22,6 @@ export const SOCIAL_LINKS = [
   {
     title: "LeetCode",
     icon: "/leetcode.svg",
-    link: "https://leetcode.com/u/lokeshnachukuppam25",
+    link: "https://leetcode.com/u/NachukuppamLokesh/",
   },
 ];
