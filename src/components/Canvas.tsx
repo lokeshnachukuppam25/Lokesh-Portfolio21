@@ -106,8 +106,8 @@ const Canvas: FC = () => {
           new Particle(
             SIZE + Math.random() * (innerWidth - SIZE * 2),
             SIZE + Math.random() * (innerHeight - SIZE * 2),
-            (Math.random() - 0.5) * 1.5,
-            (Math.random() - 0.5) * 1.5,
+            (Math.random() - 0.5) * 0.8,
+            (Math.random() - 0.5) * 0.8,
             0,
             SIZE,
             image
@@ -129,9 +129,22 @@ const Canvas: FC = () => {
     };
 
     setup();
-    animate();
+    
+    // Delay animation start until images are loaded
+    Promise.all(images.map(img => {
+      return new Promise((resolve) => {
+        if (img.complete) resolve(true);
+        else img.onload = () => resolve(true);
+      });
+    })).then(() => {
+      animate();
+    });
 
     window.addEventListener("resize", setup);
+    
+    return () => {
+      window.removeEventListener("resize", setup);
+    };
   }, []);
 
   return (

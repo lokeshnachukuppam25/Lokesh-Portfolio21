@@ -37,13 +37,12 @@ const Cursor: FC = () => {
       requestAnimationFrame(updateMouse);
 
       displayedMouse.current.x +=
-        (realMouse.current.x - displayedMouse.current.x) * 0.1;
+        (realMouse.current.x - displayedMouse.current.x) * 0.15;
       displayedMouse.current.y +=
-        (realMouse.current.y - displayedMouse.current.y) * 0.1;
+        (realMouse.current.y - displayedMouse.current.y) * 0.15;
 
       if (cursorRef.current) {
-        cursorRef.current.style.left = `${displayedMouse.current.x}px`;
-        cursorRef.current.style.top = `${displayedMouse.current.y}px`;
+        cursorRef.current.style.transform = `translate3d(${displayedMouse.current.x - 14}px, ${displayedMouse.current.y - 14}px, 0)`;
       }
     };
 
@@ -53,7 +52,8 @@ const Cursor: FC = () => {
   return (
     <div
       ref={cursorRef}
-      className="w-7 h-7 bg-transparent border border-white rounded-full fixed z-50 -translate-x-1/2 -translate-y-1/2 pointer-events-none hidden transition duration-75"
+      className="w-7 h-7 bg-transparent border border-white rounded-full fixed z-50 pointer-events-none hidden will-change-transform"
+      style={{ top: 0, left: 0 }}
     ></div>
   );
 };

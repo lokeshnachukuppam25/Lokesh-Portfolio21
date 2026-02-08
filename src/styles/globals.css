@@ -6,6 +6,25 @@ html {
   @apply scroll-smooth;
 }
 
+html.has-scroll-smooth {
+  overflow: hidden;
+}
+
+html.has-scroll-smooth body {
+  overflow: hidden;
+}
+
+/* GPU acceleration for smooth scrolling */
+[data-scroll-container] {
+  will-change: transform;
+}
+
+[data-scroll-section] {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
 body {
   @apply bg-dark text-gray-100;
 }

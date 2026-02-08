@@ -20,9 +20,16 @@ export default function ClientHomePage() {
     <LocomotiveScrollProvider
       options={{
         smooth: true,
+        multiplier: 0.8,
+        lerp: 0.075,
+        smartphone: {
+          smooth: true,
+          multiplier: 0.6,
+        },
         tablet: {
           smooth: true,
           breakpoint: 768,
+          multiplier: 0.7,
         },
       }}
       watch={[]}
@@ -31,15 +38,29 @@ export default function ClientHomePage() {
       <Cursor />
       
       <div data-scroll-container ref={containerRef} className="relative w-full">
-        <Intro />
+        <section data-scroll-section>
+          <Intro />
+        </section>
         
-        <Who />
-        <Skills />
-        <Experience />
-        <MainProjects />
-        <Services />
-        <Contact />
-        <Footer />
+        <section data-scroll-section>
+          <Who />
+        </section>
+        <section data-scroll-section>
+          <Skills />
+        </section>
+        <section data-scroll-section>
+          <Experience />
+        </section>
+        <section data-scroll-section>
+          <MainProjects />
+        </section>
+        <section data-scroll-section>
+          <Services />
+        </section>
+        <section data-scroll-section>
+          <Contact />
+          <Footer />
+        </section>
       </div>
     </LocomotiveScrollProvider>
   );
