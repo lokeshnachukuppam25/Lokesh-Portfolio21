@@ -18,13 +18,27 @@ export const metadata: Metadata = {
     type: "website",
     title: "Lokesh's Portfolio",
     description: "Nachukuppam Lokesh - ECE Student & Aspiring Software Engineer",
-    images: ["/avatar.jpg"],
+    images: [
+      {
+        url: "/avatar.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Lokesh Nachukuppam - Portfolio",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Lokesh's Portfolio",
     description: "Nachukuppam Lokesh - ECE Student & Aspiring Software Engineer",
-    images: ["/avatar.jpg"],
+    images: [
+      {
+        url: "/avatar.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Lokesh Nachukuppam - Portfolio",
+      },
+    ],
   },
 };
 
