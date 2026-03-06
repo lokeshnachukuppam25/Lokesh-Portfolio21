@@ -13,6 +13,9 @@ const Canvas: FC = () => {
 
     if (!canvas) return;
 
+    // Skip heavy canvas animation on low-end devices
+    const isLowEndDevice = navigator.hardwareConcurrency <= 4;
+    
     const images = CANVAS_IMAGES.map((source) => {
       const image = document.createElement("img");
       image.src = source;
@@ -20,21 +23,26 @@ const Canvas: FC = () => {
     });
 
     let ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+    let animationId: number | null = null;
+    let isVisible = true;
 
     const mouse = {
       x: -1000,
       y: -1000,
     };
 
-    canvas.addEventListener("mousemove", (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       mouse.x = e.clientX;
       mouse.y = e.clientY + Math.abs(canvas.getBoundingClientRect().top);
-    });
+    };
 
-    canvas.addEventListener("mouseleave", () => {
+    const handleMouseLeave = () => {
       mouse.x = -1000;
       mouse.y = -1000;
-    });
+    };
+
+    canvas.addEventListener("mousemove", handleMouseMove, { passive: true });
+    canvas.addEventListener("mouseleave", handleMouseLeave, { passive: true });
 
     class Particle {
       x: number;
@@ -71,7 +79,7 @@ const Canvas: FC = () => {
 
         this.x += this.dx;
         this.y += this.dy;
-        this.angle += 1;
+        this.angle += 0.5; // Reduced rotation speed
 
         this.draw();
       }
@@ -101,13 +109,16 @@ const Canvas: FC = () => {
       let expectedSize = Math.round(innerWidth / 20);
       SIZE = expectedSize < 30 ? 30 : expectedSize > 50 ? 50 : expectedSize;
 
-      particles = images.map(
+      // Reduce particle count on low-end devices
+      const imagesToUse = isLowEndDevice ? images.slice(0, Math.ceil(images.length / 2)) : images;
+      
+      particles = imagesToUse.map(
         (image) =>
           new Particle(
             SIZE + Math.random() * (innerWidth - SIZE * 2),
             SIZE + Math.random() * (innerHeight - SIZE * 2),
-            (Math.random() - 0.5) * 0.8,
-            (Math.random() - 0.5) * 0.8,
+            (Math.random() - 0.5) * 0.5, // Reduced speed
+            (Math.random() - 0.5) * 0.5,
             0,
             SIZE,
             image
@@ -119,7 +130,12 @@ const Canvas: FC = () => {
     };
 
     const animate = () => {
-      requestAnimationFrame(animate);
+      if (!isVisible) {
+        animationId = requestAnimationFrame(animate);
+        return;
+      }
+      
+      animationId = requestAnimationFrame(animate);
 
       ctx.clearRect(0, 0, innerWidth, innerHeight);
 
@@ -127,6 +143,12 @@ const Canvas: FC = () => {
         particle.update();
       });
     };
+
+    // Pause animation when tab is not visible
+    const handleVisibilityChange = () => {
+      isVisible = !document.hidden;
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     setup();
     
@@ -144,6 +166,10 @@ const Canvas: FC = () => {
     
     return () => {
       window.removeEventListener("resize", setup);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      canvas.removeEventListener("mousemove", handleMouseMove);
+      canvas.removeEventListener("mouseleave", handleMouseLeave);
+      if (animationId) cancelAnimationFrame(animationId);
     };
   }, []);
 

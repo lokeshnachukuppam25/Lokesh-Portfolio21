@@ -20,16 +20,14 @@ export default function ClientHomePage() {
     <LocomotiveScrollProvider
       options={{
         smooth: true,
-        multiplier: 0.8,
-        lerp: 0.075,
+        multiplier: 1,
+        lerp: 0.1, // Higher lerp = less computation, smoother feel
         smartphone: {
-          smooth: true,
-          multiplier: 0.6,
+          smooth: false, // Disable smooth scroll on mobile for better performance
         },
         tablet: {
-          smooth: true,
+          smooth: false, // Disable smooth scroll on tablet for better performance
           breakpoint: 768,
-          multiplier: 0.7,
         },
       }}
       watch={[]}

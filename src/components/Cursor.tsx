@@ -19,7 +19,9 @@ const Cursor: FC = () => {
   useEffect(() => {
     if (window.matchMedia("(pointer: coarse)").matches) return;
 
-    window.addEventListener("mousemove", (e) => {
+    let animationId: number | null = null;
+
+    const handleMouseMove = (e: MouseEvent) => {
       if (cursorRef.current) {
         if (isFirstMove.current) {
           cursorRef.current.style.display = "block";
@@ -31,10 +33,12 @@ const Cursor: FC = () => {
         realMouse.current.x = e.clientX;
         realMouse.current.y = e.clientY;
       }
-    });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
 
     const updateMouse = () => {
-      requestAnimationFrame(updateMouse);
+      animationId = requestAnimationFrame(updateMouse);
 
       displayedMouse.current.x +=
         (realMouse.current.x - displayedMouse.current.x) * 0.15;
@@ -47,6 +51,11 @@ const Cursor: FC = () => {
     };
 
     updateMouse();
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      if (animationId) cancelAnimationFrame(animationId);
+    };
   }, []);
 
   return (
